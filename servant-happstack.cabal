@@ -1,0 +1,30 @@
+name:                servant-happstack
+version:             0.1.0.0
+license:             BSD3
+license-file:        LICENSE
+author:              Alp Mestanogullari, Sönke Hahn, Julian K. Arni, Jeremy Shaw
+maintainer:          jeremy@n-heptane.com
+copyright:           2014 Zalora South East Asia Pte Ltd
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  exposed-modules:     Servant.Happstack
+                       Servant.Happstack.Internal.Enter
+                       Servant.Happstack.Internal.Router
+                       Servant.Happstack.Internal.RoutingApplication
+                       Servant.Happstack.Internal.ServantErr
+
+  build-depends:       base >=4.8 && <4.9,
+                       bytestring,
+                       containers,
+                       happstack-server,
+                       mmorph,
+                       mtl,
+                       servant,
+                       string-conversions >= 0.3  && < 0.5,
+                       text,
+                       transformers
+  hs-source-dirs:      src
+  default-language:    Haskell2010
