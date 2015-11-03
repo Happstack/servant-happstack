@@ -11,6 +11,7 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:     Servant.Happstack
+                       Servant.Happstack.Internal
                        Servant.Happstack.Internal.Enter
                        Servant.Happstack.Internal.Router
                        Servant.Happstack.Internal.RoutingApplication

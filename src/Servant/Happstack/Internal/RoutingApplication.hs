@@ -6,11 +6,12 @@
 {-# LANGUAGE StandaloneDeriving         #-}
 module Servant.Happstack.Internal.RoutingApplication where
 
+import           Control.Monad.Trans                (liftIO)
 import           Control.Monad.Trans.Except         (ExceptT, runExceptT)
 import qualified Data.ByteString                    as B
 import qualified Data.ByteString.Lazy               as BL
 import           Data.Monoid                        ((<>))
-import           Happstack.Server                   (Request, Response(..), ServerPart)
+import           Happstack.Server                   (Request, Response(..), ServerPart, askRq)
 import           Network.HTTP.Types                 (Status(..))
 import           Servant.API
 import           Servant.Happstack.Internal.ServantErr
@@ -29,6 +30,18 @@ data RouteResult a =
   | FailFatal !ServantErr     -- ^ Don't try other paths.
   | Route !a
   deriving (Eq, Show, Read, Functor)
+
+toServerPart :: RoutingApplication -> ServerPart Response
+toServerPart ra =
+    do req <- askRq
+       res <- liftIO $ ra req respond
+       pure res
+    where
+      respond :: RouteResult Response -> IO Response
+      respond (Fail err)      = pure $ responseServantErr err
+      respond (FailFatal err) = pure $ responseServantErr err
+      respond (Route v)       = pure v
+
 
 -- We currently mix up the order in which we perform checks
 -- and the priority with which errors are reported.
