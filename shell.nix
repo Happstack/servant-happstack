@@ -4,12 +4,12 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, base, either, happstack-server, servant, stdenv, bytestring, mmorph, mtl, transformers, servant-todo-common }:
+  f = { mkDerivation, base, case-insensitive, either, happstack-server, http-api-data, http-types, network, servant, stdenv, bytestring, mmorph, mtl, transformers}:
       mkDerivation {
         pname = "servant-happstack";
         version = "0.1.0.0";
         src = ./.;
-        libraryHaskellDepends = [ base happstack-server either servant bytestring mmorph mtl transformers servant-todo-common ];
+        libraryHaskellDepends = [ base case-insensitive happstack-server http-api-data http-types either network servant bytestring mmorph mtl transformers ];
         license = stdenv.lib.licenses.bsd3;
       };
 
