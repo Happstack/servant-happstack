@@ -22,7 +22,7 @@ library
                        case-insensitive,
                        containers,
                        happstack-server,
-                       http-api-data,
+                       http-api-data >= 0.3.8.1,
                        http-types,
                        mmorph,
                        mtl,
