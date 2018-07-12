@@ -53,7 +53,7 @@ import Servant.Happstack.Internal.ServantErr
 import Happstack.Server                   hiding (Headers, getResponse)
 import Happstack.Server.Internal.Monads   (WebT, FilterFun, unFilterFun, runServerPartT, ununWebT)
 import           Web.HttpApiData          (FromHttpApiData)
-import           Web.HttpApiData.Internal (parseUrlPieceMaybe, parseHeaderMaybe, parseQueryParamMaybe)
+import           Web.Internal.HttpApiData (parseUrlPieceMaybe, parseHeaderMaybe, parseQueryParamMaybe)
 
 class HasServer layout where
   type ServerT layout (m :: * -> *) :: *
